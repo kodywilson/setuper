@@ -1,0 +1,14 @@
+---
+- hosts: local
+  become: yes
+  vars:
+    app_name: Slack
+    app_url: https://slack.com/ssb/download-osx
+    installer_type: app
+    download_file_type: dmg
+    install_method: dmg
+  roles: 
+    - setup
+    - installer
+    - cleanup
+   

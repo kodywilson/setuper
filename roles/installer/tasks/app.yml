@@ -1,0 +1,3 @@
+---
+- name: Copy {{installer_source}}/{{app_name}}.app to Applications directory
+  command: cp -R "{{installer_source}}/{{app_name}}.app" /Applications
