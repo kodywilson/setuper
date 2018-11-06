@@ -1,11 +1,12 @@
 # setuper
 Ansible Playbooks and other scripts for setting up Mac
 
-```git clone https://github.com/kodywilson/setuper.gitaybooks.git```
-
 Open the terminal and type in the following commands:
-1) $ cd setuper
-2) $ ./install.sh
+
+1) $ ```git clone git@github.com:kodywilson/setuper.git```
+2) $ ```cd setuper```
+3) $ ```./install.sh```
+
 Enter password when prompted.
 
 The [shell script](https://github.com/tensult/mac-setup-playbooks/blob/master/install.sh) will install [Homebrew](https://brew.sh/), [Git](https://git-scm.com/), [Pip](https://pip.pypa.io/en/stable/), and [Ansible](https://www.ansible.com/).
