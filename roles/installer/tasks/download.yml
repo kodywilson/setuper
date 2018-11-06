@@ -1,3 +1,0 @@
----
-- name: Download {{app_name}} to {{downloads}}
-  get_url: url={{app_url}} dest={{downloads}}/{{app_name}}.{{download_file_type}}

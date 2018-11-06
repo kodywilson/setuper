@@ -1,0 +1,54 @@
+---
+downloads: ~/.ansible-downloads/
+
+configure_terminal: no
+configure_osx: no
+
+homebrew_installed_packages:
+  #- autoconf
+  - bash-completion
+  #- doxygen
+  #- gettext
+  #- gifsicle
+  #- git
+  - go
+  #- gpg
+  #- hub
+  #- httpie
+  #- iperf
+  #- libevent
+  #- sqlite
+  #- mcrypt
+  #- nmap
+  #- node
+  #- nvm
+  #- php
+  #- ssh-copy-id
+  #- cowsay
+  #- readline
+  #- openssl
+  #- pv
+  - wget
+  #- wrk
+
+homebrew_taps:
+  - homebrew/core
+  - homebrew/cask
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - atom
+  - docker
+  #- firefox
+  - google-chrome
+  #- macvim
+  #- sequel-pro
+  - skitch
+  #- slack
+  #- sublime-text
+  #- transmit
+  #- vagrant
+  - visual-studio-code
+
+# Glob pattern to ansible task files to run after all other tasks are finished.
+post_provision_tasks: []

@@ -14,6 +14,8 @@ if [[ $? != 0 ]] ; then
 else
   echo "Git is already installed."
 fi
+# Apparently I could have installed Ansible with brew install ansible
+# I may update this later to do it that way
 which -s pip
 if [[ $? != 0 ]] ; then
   echo "Installing pip..."
@@ -27,7 +29,8 @@ if [[ $? != 0 ]] ; then
   echo "Installing ansible..."
   sudo -H pip install ansible
 else
-  echo "Ansible is already installed."
+  echo "Ansible is already installed. Running playbook..."
+  ansible-galaxy install -r requirements.yml
+  sudo pwd # This gets around a permissions error with Homebrew
+  ansible-playbook main.yml
 fi
-
-#sudo ansible-playbook main_playbook.yaml
