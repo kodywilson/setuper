@@ -7,7 +7,7 @@ configure_osx: no
 
 dockitems_disabled:
   - Safari
-  - Contacts
+  - Siri
   - Notes
   - Reminders
   - Maps
@@ -18,7 +18,10 @@ dockitems_disabled:
   - iBooks
   - App Store
   - System Preferences
-  - Calendar
+  - Self Service
+  - CrashPlan
+  - McAfee Endpoint Security for Mac
+  - Thunderbird
 
 dockitems_enabled:
   - name: Google Chrome
@@ -39,6 +42,15 @@ dockitems_enabled:
   - name: Terminal
     path: /Applications/Utilities/Terminal.app
     pos: 6
+  - name: Mail
+    path: /Applications/Utilities/Mail.app
+    pos: 7
+  - name: Calendar
+    path: /Applications/Utilities/Calendar.app
+    pos: 8
+  - name: Contacts
+    path: /Applications/Utilities/Contacts.app
+    pos: 9
 
 homebrew_installed_packages:
   #- autoconf
@@ -78,6 +90,7 @@ homebrew_cask_apps:
   - docker
   #- firefox
   - google-chrome
+  - keepassx
   #- macvim
   #- sequel-pro
   - skitch
