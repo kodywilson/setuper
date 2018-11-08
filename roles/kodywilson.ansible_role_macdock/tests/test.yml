@@ -1,0 +1,7 @@
+---
+
+- hosts: localhost
+  vars:
+    dockitems_enabled: []
+  roles:
+    - fubarhouse.macdock
