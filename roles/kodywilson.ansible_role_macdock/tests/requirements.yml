@@ -1,0 +1,5 @@
+---
+
+ - src: https://github.com/fubarhouse/ansible-role-macdock
+   version: master
+   name: fubarhouse.macdock

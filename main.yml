@@ -14,6 +14,9 @@
   roles:
     - role: geerlingguy.homebrew
       tags: ['homebrew']
+    - role: kodywilson.ansible_role_macdock
+      tags: ['ansible_role_macdock']
+      when: configure_dock
 
   tasks:
     #- include_tasks: tasks/ansible-setup.yml
