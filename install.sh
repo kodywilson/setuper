@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ $OS == "Windows_NT" ]] ; then
-  echo "Windows is not supported yet."
+  echo "Windows support will be provided by a Powershell script."
   exit
 fi
 which -s brew
