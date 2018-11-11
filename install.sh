@@ -1,4 +1,8 @@
 #!/bin/bash
+if [[ $OS == "Windows_NT" ]] ; then
+  echo "Windows is not supported yet."
+  exit
+fi
 which -s brew
 if [[ $? != 0 ]] ; then
   echo "Installing Homebrew..."
