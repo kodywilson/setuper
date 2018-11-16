@@ -66,12 +66,13 @@ homebrew_installed_packages:
   #- httpie
   #- iperf
   #- libevent
-  #- sqlite
+  - sqlite
   #- mcrypt
   #- nmap
   #- node
   #- nvm
   #- php
+  - python3
   #- ssh-copy-id
   #- cowsay
   #- readline
@@ -87,6 +88,7 @@ homebrew_taps:
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
   - atom
+  - db-browser-for-sqlite
   - docker
   #- firefox
   - google-chrome
