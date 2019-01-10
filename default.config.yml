@@ -93,6 +93,8 @@ homebrew_cask_apps:
   #- firefox
   - google-chrome
   - keepassx
+  - libreoffice
+  - libreoffice-language-pack
   #- macvim
   #- sequel-pro
   - skitch
