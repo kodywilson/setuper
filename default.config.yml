@@ -93,6 +93,8 @@ homebrew_cask_apps:
   #- firefox
   - google-chrome
   - keepassx
+  - libreoffice
+  - libreoffice-language-pack
   #- macvim
   #- sequel-pro
   - skitch
@@ -100,6 +102,7 @@ homebrew_cask_apps:
   #- sublime-text
   #- transmit
   #- vagrant
+  - virtualbox
   - visual-studio-code
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
