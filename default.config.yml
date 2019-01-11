@@ -90,6 +90,7 @@ homebrew_cask_apps:
   - atom
   - db-browser-for-sqlite
   - docker
+  - drawio
   #- firefox
   - google-chrome
   - keepassx
