@@ -93,6 +93,7 @@ homebrew_cask_apps:
   - drawio
   #- firefox
   - google-chrome
+  - insomnia
   - keepassx
   - libreoffice
   - libreoffice-language-pack
