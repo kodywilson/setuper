@@ -97,6 +97,7 @@ homebrew_cask_apps:
   - keepassx
   - libreoffice
   - libreoffice-language-pack
+  - macsvg
   #- macvim
   #- sequel-pro
   - skitch
