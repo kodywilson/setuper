@@ -30,7 +30,7 @@ if [[ $? != 0 ]] ; then
   sudo -H pip install ansible
 else
   echo "Ansible is already installed. Running playbook..."
-  ansible-galaxy install -r requirements.yml
+  ansible-galaxy install -r mac_requirements.yml
   sudo pwd # This gets around a permissions error with Homebrew
-  ansible-playbook main.yml
+  ansible-playbook mac.yml
 fi
