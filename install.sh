@@ -10,21 +10,17 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   if [[ "$distro" == *"Ubuntu"* ]]; then
     echo "Found Ubuntu, proceeding with setup..."
     echo "Using sudo, please respond to prompts."
-    echo "apt update..."
-    sudo apt update
+    echo "apt-get update..."
+    sudo apt-get update
     echo "install prerequisites for ansible..."
-    sudo apt install -y software-properties-common vim git
+    sudo apt-get install -y software-properties-common vim git
     echo "add ansible repository..."
     sudo apt-add-repository --yes --update ppa:ansible/ansible
     echo "install ansible and python..."
-    sudo apt install -y ansible #python
+    sudo apt-get install -y ansible python-apt
     echo "run the docker install playbook..."
     sudo ansible-playbook docker_ubuntu.yml
-    echo "add user to docker group..."
-    sudo usermod -aG docker ${USER}
-    echo "log user back in..."
-    sudo su - ${USER}
-    echo "You are ready to dock!"
+    echo "Docker should be installed and swarm mode enabled."
   else
     echo "I know you are running Linux, but I can not tell what distro..."
   fi
