@@ -8,24 +8,19 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   echo "Linux detected."
   distro="$(awk -F= '/^NAME/{print $2}' /etc/os-release)"
   if [[ "$distro" == *"Ubuntu"* ]]; then
-    user_guy=$USER
     echo "Found Ubuntu, proceeding with setup..."
     echo "Using sudo, please respond to prompts."
-    echo "apt update..."
-    sudo apt update 2>/dev/null
+    echo "apt-get update..."
+    sudo apt-get update
     echo "install prerequisites for ansible..."
-    sudo apt install -y software-properties-common vim git 2>/dev/null
+    sudo apt-get install -y software-properties-common vim git
     echo "add ansible repository..."
     sudo apt-add-repository --yes --update ppa:ansible/ansible
     echo "install ansible and python..."
-    sudo apt install -y ansible python-apt 2>/dev/null
+    sudo apt-get install -y ansible python-apt
     echo "run the docker install playbook..."
     sudo ansible-playbook docker_ubuntu.yml
-    echo "add user to docker group..."
-    sudo usermod -aG docker ${user_guy}
-    echo "log user back in..."
-    sudo su - ${user_guy}
-    echo "You are ready to dock!"
+    echo "Docker should be installed and swarm mode enabled."
   else
     echo "I know you are running Linux, but I can not tell what distro..."
   fi
