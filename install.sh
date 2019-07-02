@@ -7,7 +7,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   # maybe detect deb vs rpm here, Arch, etc.
   echo "Linux detected."
   distro="$(awk -F= '/^NAME/{print $2}' /etc/os-release)"
-  if [[ "$distro" == "Ubuntu" ]]; then
+  if [[ "$distro" == *"Ubuntu"* ]]; then
     echo "Found Ubuntu, proceeding with setup..."
     echo "Using sudo, please respond to prompts."
     echo "apt update..."
