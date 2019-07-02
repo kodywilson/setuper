@@ -1,6 +1,8 @@
 #!/bin/bash
-# Detect OS and set up server. Uses Ansible for CM.
-#
+# Detect OS and set up server. Uses Ansible for configuration management.
+# Pass --upgrade to attempt to upgrade brew casks and packages on Mac.
+#      This can take a while if you have many packages/casks.
+up2date=$1
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   # maybe detect deb vs rpm here, Arch, etc.
   echo "Linux detected."
@@ -9,10 +11,9 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo "Found Ubuntu, proceeding with setup..."
     echo "Using sudo, please respond to prompts."
     sudo apt update
-    sudo apt install -y software-properties-common
+    sudo apt install -y software-properties-common vim git
     sudo apt-add-repository --yes --update ppa:ansible/ansible
-    sudo apt install -y ansible
-    sudo apt install -y python
+    sudo apt install -y ansible python
     sudo ansible-playbook docker_ubuntu.yml
   else
     echo "I know you are running Linux, but I can not tell what distro..."
@@ -27,6 +28,16 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   else
     echo "Homebrew already installed, updating..."
     brew update
+    if [[ $up2date = "--upgrade" ]] ; then
+      echo "Brew will upgrade installed casks and packages. This could take a while!"
+      echo "First packages..."
+      brew upgrade
+      echo "Then casks..."
+      brew cask upgrade
+      echo "Now cleanup and run brew doctor."
+      brew cleanup
+      brew doctor
+    fi
   fi
   which -s git
   if [[ $? != 0 ]] ; then
@@ -67,3 +78,4 @@ else
   echo "OS not detected, not sure what to do here so exiting..."
 fi
 echo "All done here, so long and thanks for all the fish!"
+exit
