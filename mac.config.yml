@@ -73,6 +73,7 @@ homebrew_installed_packages:
   #- nvm
   #- php
   - python3
+  - shellcheck
   #- ssh-copy-id
   #- cowsay
   #- readline
