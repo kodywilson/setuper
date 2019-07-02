@@ -31,11 +31,11 @@
       apt: name="docker.io" state=latest update_cache=yes
       tags: docker
 
-    #- name: "Check if Swarm has already been Initialized"
-    #  shell: docker node ls
-    #  register: swarm_status
-    #  ignore_errors: true
-    #  tags: swarm
+    - name: "Check if Swarm has already been Initialized"
+      shell: docker node ls
+      register: swarm_status
+      ignore_errors: true
+      tags: swarm
 
     - name: "Initialize Docker Swarm"
       shell: >
