@@ -20,7 +20,11 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo apt install -y ansible #python
     echo "run the docker install playbook..."
     sudo ansible-playbook docker_ubuntu.yml
+    echo "add user to docker group..."
     sudo usermod -aG docker ${USER}
+    echo "log user back in..."
+    sudo su - ${USER}
+    echo "You are ready to dock!"
   else
     echo "I know you are running Linux, but I can not tell what distro..."
   fi
