@@ -3,7 +3,20 @@
 #
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   # maybe detect deb vs rpm here, Arch, etc.
-  echo "Linux detected..."
+  echo "Linux detected."
+  distro="$(awk -F= '/^NAME/{print $2}' /etc/os-release)"
+  if [[ "$distro" == "linux-gnu" ]]; then
+    echo "Found Ubuntu, proceeding with setup..."
+    echo "Using sudo, please respond to prompts."
+    sudo apt update
+    sudo apt install -y software-properties-common
+    sudo apt-add-repository --yes --update ppa:ansible/ansible
+    sudo apt install -y ansible
+    sudo apt install -y python
+    sudo ansible-playbook docker_ubuntu.yml
+  else
+    echo "I know you are running Linux, but I can not tell what distro..."
+  fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   # Mac OSX
   echo "Mac OSX Detected, proceeding with setup."
