@@ -7,14 +7,20 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   # maybe detect deb vs rpm here, Arch, etc.
   echo "Linux detected."
   distro="$(awk -F= '/^NAME/{print $2}' /etc/os-release)"
-  if [[ "$distro" == "linux-gnu" ]]; then
+  if [[ "$distro" == "Ubuntu" ]]; then
     echo "Found Ubuntu, proceeding with setup..."
     echo "Using sudo, please respond to prompts."
+    echo "apt update..."
     sudo apt update
+    echo "install prerequisites for ansible..."
     sudo apt install -y software-properties-common vim git
+    echo "add ansible repository..."
     sudo apt-add-repository --yes --update ppa:ansible/ansible
-    sudo apt install -y ansible python
+    echo "install ansible and python..."
+    sudo apt install -y ansible #python
+    echo "run the docker install playbook..."
     sudo ansible-playbook docker_ubuntu.yml
+    sudo usermod -aG docker ${USER}
   else
     echo "I know you are running Linux, but I can not tell what distro..."
   fi
