@@ -27,6 +27,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     for i in {1..3}; do echo; done
     echo "Docker should be installed and swarm mode enabled."
     for i in {1..3}; do echo; done
+    # The stuff below will be moved to an Ansible playbook
     if grep "vagrant" /etc/passwd >/dev/null 2>&1; then
       # Vagrant specific configuration
       echo "Adding vagrant to docker group..."
