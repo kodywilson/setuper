@@ -31,6 +31,12 @@
       apt: name="docker.io" state=latest update_cache=yes
       tags: docker
 
+    - name: "Start docker on boot"
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
     - name: "Check if Swarm has already been Initialized"
       shell: docker node ls
       register: swarm_status
@@ -54,3 +60,13 @@
       shell: docker swarm join-token --quiet worker
       register: worker_token
       tags: swarm
+
+     - name: Add user "crane" for docker
+       user:
+         name: crane
+         group: docker
+         shell: /sbin/nologin
+         append: yes
+         comment: "Docker nologin User"
+         state: present
+         become: true
