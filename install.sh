@@ -1,26 +1,57 @@
 #!/bin/bash
 # Detect OS and set up server. Uses Ansible for configuration management.
+# On Ubuntu, it also tries to start a Jellyfin container.
 # Pass --upgrade to attempt to upgrade brew casks and packages on Mac.
-#      This can take a while if you have many packages/casks.
+#        This can take a while if you have many packages/casks.
 up2date=$1
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-  # maybe detect deb vs rpm here, Arch, etc.
-  echo "Linux detected."
+ echo "Linux detected, now checking specific distro..."
   distro="$(awk -F= '/^NAME/{print $2}' /etc/os-release)"
   if [[ "$distro" == *"Ubuntu"* ]]; then
     echo "Found Ubuntu, proceeding with setup..."
     echo "Using sudo, please respond to prompts."
     echo "apt-get update..."
     sudo apt-get update
+    for i in {1..3}; do echo; done
     echo "install prerequisites for ansible..."
     sudo apt-get install -y software-properties-common vim git
+    for i in {1..3}; do echo; done
     echo "add ansible repository..."
     sudo apt-add-repository --yes --update ppa:ansible/ansible
+    for i in {1..3}; do echo; done
     echo "install ansible and python..."
     sudo apt-get install -y ansible python-apt
+    for i in {1..3}; do echo; done
     echo "run the docker install playbook..."
     sudo ansible-playbook docker_ubuntu.yml
+    for i in {1..3}; do echo; done
     echo "Docker should be installed and swarm mode enabled."
+    for i in {1..3}; do echo; done
+    if grep "vagrant" /etc/passwd >/dev/null 2>&1; then
+      # Vagrant specific configuration
+      echo "Adding vagrant to docker group..."
+      sudo usermod -aG docker "vagrant"
+      docker_base='/home/vagrant/code/docker/'
+      media_base='/home/vagrant/code/docker/media/'
+    else
+      # Configure directories
+      docker_base='/docker/'
+      media_base='/tank/'
+    fi
+    echo "Now creating directories for docker image to access..."
+    sudo mkdir -p "${docker_base}jellyfin/config"  # Jellyfin Config
+    sudo mkdir -p "${media_base}Movies"            # Media Directory
+    echo "Set ownership and permissions for docker user..."
+    sudo chown -R "crane:docker" "${docker_base}"
+    sudo chown -R "crane:docker" "${media_base}Movies"
+    sudo chmod -R 774 "${docker_base}"
+    sudo chmod -R 774 "${media_base}Movies"
+    for i in {1..3}; do echo; done
+    echo "Trying to start up a Jellyfin server container..."
+    # Add a check to see if container is already running!
+    sudo docker run -d --name=jellyfin --net=host -v ${docker_base}jellyfin/config:/config -v ${media_base}:/media --user "$(id -u crane):$(id -g crane)" jellyfin/jellyfin:latest
+    for i in {1..3}; do echo; done
+    echo "<-------<<  End of installer script  >>------->"
   else
     echo "I know you are running Linux, but I can not tell what distro..."
   fi
