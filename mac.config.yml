@@ -108,6 +108,7 @@ homebrew_cask_apps:
   - vagrant
   - virtualbox
   - visual-studio-code
+  - vlc
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
 post_provision_tasks: []
