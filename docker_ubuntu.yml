@@ -61,12 +61,12 @@
       register: worker_token
       tags: swarm
 
-     - name: Add user "crane" for docker
-       user:
-         name: crane
-         group: docker
-         shell: /sbin/nologin
-         append: yes
-         comment: "Docker nologin User"
-         state: present
-         become: true
+    - name: "Add user crane for docker"
+      user:
+        name: crane
+        group: docker
+        shell: /sbin/nologin
+        append: yes
+        comment: "Docker nologin User"
+        state: present
+        become: true
