@@ -65,6 +65,7 @@
       user:
         name: crane
         group: docker
+        groups: docker
         shell: /sbin/nologin
         append: yes
         comment: "Docker nologin User"
