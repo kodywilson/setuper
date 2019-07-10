@@ -41,6 +41,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     fi
     echo "Now creating directories for docker image to access..."
     sudo mkdir -p "${docker_base}jellyfin/config"  # Jellyfin Config
+    sudo mkdir -p "${docker_base}kodi"   # kodi persistent directory
     sudo mkdir -p "${media_base}Movies"            # Media Directory
     echo "Set ownership and permissions for docker user..."
     sudo chown -R "crane:docker" "${docker_base}"
@@ -51,6 +52,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo "Trying to start up a Jellyfin server container..."
     # Add a check to see if container is already running!
     sudo docker run -d --name=jellyfin --net=host -v ${docker_base}jellyfin/config:/config -v ${media_base}:/media --user "$(id -u crane):$(id -g crane)" jellyfin/jellyfin:latest
+    for i in {1..3}; do echo; done
+    echo "Now install xdocker11 and prepare for kodi on docker..."
+    sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
+    curl -fsSL https://raw.githubusercontent.com/mviereck/x11docker/master/x11docker | sudo bash -s -- --update
     for i in {1..3}; do echo; done
     echo "<-------<<  End of installer script  >>------->"
   else
