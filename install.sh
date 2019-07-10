@@ -49,9 +49,15 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     sudo chmod -R 774 "${docker_base}"
     sudo chmod -R 774 "${media_base}Movies"
     for i in {1..3}; do echo; done
-    echo "Trying to start up a Jellyfin server container..."
-    # Add a check to see if container is already running!
-    sudo docker run -d --name=jellyfin --net=host -v ${docker_base}jellyfin/config:/config -v ${media_base}:/media --user "$(id -u crane):$(id -g crane)" jellyfin/jellyfin:latest
+    if [ ! "$(docker ps -q -f name=jellyfin)" ]; then
+      if [ "$(docker ps -aq -f status=exited -f name=jellyfin)" ]; then
+        docker rm jellyfin # cleanup
+      fi
+      echo "Trying to start up a Jellyfin container..."
+      sudo docker run -d --name=jellyfin --net=host -v ${docker_base}jellyfin/config:/config -v ${media_base}:/media --user "$(id -u crane):$(id -g crane)" jellyfin/jellyfin:latest
+    else
+      echo "Jellyfin is already running..."
+    fi
     for i in {1..3}; do echo; done
     echo "Now install xdocker11 and prepare for kodi on docker..."
     sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
