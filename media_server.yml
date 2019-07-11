@@ -35,4 +35,3 @@
         - { dest: '/home/vagrant/code/docker/kodi', owner: 'crane', group: 'docker', mode: '0774'}
         - { dest: '/home/vagrant/code/docker/media', owner: 'crane', group: 'docker', mode: '0774'}
       when: user_accts.stdout.find('vagrant') != -1
-      debug: msg="Found vagrant user..."

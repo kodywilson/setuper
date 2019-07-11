@@ -81,4 +81,3 @@
         groups: docker
         append: yes
       when: user_accts.stdout.find('vagrant') != -1
-      debug: msg="Found vagrant user and added to docker group."
