@@ -1,0 +1,15 @@
+# Configure system for Jellyfin and Kodi
+---
+- hosts: all
+  connection: local
+
+  tasks:
+    - name: "ansible create directory with_items example"
+      file:
+        path: "{{ item.dest }}"
+        mode: "{{item.mode}}"
+        state: directory
+      with_items:
+        - { dest: '/docker/jellyfin/config', mode: '0774'}
+        - { dest: '/docker/kodi', mode: '0774'}
+        - { dest: '/tank/Movies', mode: '0774'}
