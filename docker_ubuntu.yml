@@ -4,7 +4,7 @@
   connection: local
 
   tasks:
-    - name: read the passwd file
+    - name: "read the passwd file"
       shell: cat /etc/passwd
       register: user_accts
 

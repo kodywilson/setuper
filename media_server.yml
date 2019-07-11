@@ -4,7 +4,7 @@
   connection: local
 
   tasks:    
-    - name: read the passwd file
+    - name: "read the passwd file"
       shell: cat /etc/passwd
       register: user_accts
 
@@ -19,7 +19,7 @@
       with_items:
         - { dest: '/docker/jellyfin/config', owner: 'crane', group: 'docker', mode: '0774'}
         - { dest: '/docker/kodi', owner: 'crane', group: 'docker', mode: '0774'}
-        - { dest: '/tank/Movies', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/tank/Movies', owner: 'crane', group: 'docker',  mode: '0774'}
       when: user_accts.stdout.find('vagrant') = -1
 
     - name: "create directories for vagrant image"
