@@ -41,10 +41,10 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
       echo "Jellyfin is already running..."
     fi
     for i in {1..3}; do echo; done
-    echo "Now install xdocker11 and prepare for kodi on docker..."
-    sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
-    curl -fsSL https://raw.githubusercontent.com/mviereck/x11docker/master/x11docker | sudo bash -s -- --update
-    for i in {1..3}; do echo; done
+    #echo "Now install xdocker11 and prepare for kodi on docker..."
+    #sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
+    #curl -fsSL https://raw.githubusercontent.com/mviereck/x11docker/master/x11docker | sudo bash -s -- --update
+    #for i in {1..3}; do echo; done
     echo "<-------<<  End of installer script  >>------->"
   else
     echo "I know you are running Linux, but I can not tell what distro..."
