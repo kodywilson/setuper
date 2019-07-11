@@ -4,6 +4,10 @@
   connection: local
 
   tasks:
+    - name: read the passwd file
+      shell: cat /etc/passwd
+      register: user_accts
+
     - name: "Install Docker Dependencies"
       apt:
         pkg:
@@ -70,3 +74,11 @@
         append: yes
         comment: "Docker nologin User"
         state: present
+
+    - name: "Add vagrant to docker group"
+      user:
+        name: vagrant
+        groups: docker
+        append: yes
+      when: user_accts.stdout.find('vagrant') != -1
+      debug: msg="Found vagrant user and added to docker group."

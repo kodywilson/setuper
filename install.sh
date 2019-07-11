@@ -28,26 +28,27 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo "Docker should be installed and swarm mode enabled."
     for i in {1..3}; do echo; done
     # The stuff below will be moved to an Ansible playbook
-    if grep "vagrant" /etc/passwd >/dev/null 2>&1; then
+    #if grep "vagrant" /etc/passwd >/dev/null 2>&1; then
       # Vagrant specific configuration
-      echo "Adding vagrant to docker group..."
-      sudo usermod -aG docker "vagrant"
-      docker_base='/home/vagrant/code/docker/'
-      media_base='/home/vagrant/code/docker/media/'
-    else
+      #echo "Adding vagrant to docker group..."
+      #sudo usermod -aG docker "vagrant"
+      #docker_base='/home/vagrant/code/docker/'
+      #media_base='/home/vagrant/code/docker/media/'
+    #else
       # Configure directories
-      docker_base='/docker/'
-      media_base='/tank/'
-    fi
+      #docker_base='/docker/'
+      #media_base='/tank/'
+    #fi
     echo "Now creating directories for docker image to access..."
-    sudo mkdir -p "${docker_base}jellyfin/config"  # Jellyfin Config
-    sudo mkdir -p "${docker_base}kodi"   # kodi persistent directory
-    sudo mkdir -p "${media_base}Movies"            # Media Directory
+    #sudo mkdir -p "${docker_base}jellyfin/config"  # Jellyfin Config
+    #sudo mkdir -p "${docker_base}kodi"   # kodi persistent directory
+    #sudo mkdir -p "${media_base}Movies"            # Media Directory
     echo "Set ownership and permissions for docker user..."
-    sudo chown -R "crane:docker" "${docker_base}"
-    sudo chown -R "crane:docker" "${media_base}Movies"
-    sudo chmod -R 774 "${docker_base}"
-    sudo chmod -R 774 "${media_base}Movies"
+    sudo ansible-playbook media_server.yml
+    #sudo chown -R "crane:docker" "${docker_base}"
+    #sudo chown -R "crane:docker" "${media_base}Movies"
+    #sudo chmod -R 774 "${docker_base}"
+    #sudo chmod -R 774 "${media_base}Movies"
     for i in {1..3}; do echo; done
     if [ ! "$(docker ps -q -f name=jellyfin)" ]; then
       if [ "$(docker ps -aq -f status=exited -f name=jellyfin)" ]; then
