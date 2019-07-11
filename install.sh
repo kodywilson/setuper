@@ -27,35 +27,16 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     for i in {1..3}; do echo; done
     echo "Docker should be installed and swarm mode enabled."
     for i in {1..3}; do echo; done
-    # The stuff below will be moved to an Ansible playbook
-    #if grep "vagrant" /etc/passwd >/dev/null 2>&1; then
-      # Vagrant specific configuration
-      #echo "Adding vagrant to docker group..."
-      #sudo usermod -aG docker "vagrant"
-      #docker_base='/home/vagrant/code/docker/'
-      #media_base='/home/vagrant/code/docker/media/'
-    #else
-      # Configure directories
-      #docker_base='/docker/'
-      #media_base='/tank/'
-    #fi
-    echo "Now creating directories for docker image to access..."
-    #sudo mkdir -p "${docker_base}jellyfin/config"  # Jellyfin Config
-    #sudo mkdir -p "${docker_base}kodi"   # kodi persistent directory
-    #sudo mkdir -p "${media_base}Movies"            # Media Directory
-    echo "Set ownership and permissions for docker user..."
+    echo "Now creating directories for docker image to access and..."
+    echo "...setting ownership and permissions for docker user."
     sudo ansible-playbook media_server.yml
-    #sudo chown -R "crane:docker" "${docker_base}"
-    #sudo chown -R "crane:docker" "${media_base}Movies"
-    #sudo chmod -R 774 "${docker_base}"
-    #sudo chmod -R 774 "${media_base}Movies"
     for i in {1..3}; do echo; done
     if [ ! "$(docker ps -q -f name=jellyfin)" ]; then
       if [ "$(docker ps -aq -f status=exited -f name=jellyfin)" ]; then
         docker rm jellyfin # cleanup
       fi
       echo "Trying to start up a Jellyfin container..."
-      sudo docker run -d --name=jellyfin --net=host -v ${docker_base}jellyfin/config:/config -v ${media_base}:/media --user "$(id -u crane):$(id -g crane)" jellyfin/jellyfin:latest
+      sudo docker run -d --name=jellyfin --net=host -v /docker/jellyfin/config:/config -v /tank:/media --user "$(id -u crane):$(id -g crane)" jellyfin/jellyfin:latest
     else
       echo "Jellyfin is already running..."
     fi
