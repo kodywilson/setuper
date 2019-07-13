@@ -13,13 +13,15 @@ The [shell script](https://github.com/tensult/mac-setup-playbooks/blob/master/in
 
 Next, it installs the required Ansible roles.
 
-Finally, it'll run the Ansible playbook called main.yml which installs a list of applications and packages.
+Mac Only Section
+
+At the end, it will run the Ansible playbook called mac.yml which installs a list of applications and packages.
 
 You can reconfigure the code to install other apps based on your needs by editing the following files.
-main.yml - Set variable file, tasks to run, roles to include, etc.
+mac.yml - Set variable file, tasks to run, roles to include, etc.
 
 List of applications and packages to install. Edit this to customize for your setup.
-default.config.yml
+mac.config.yml
 
 The following roles are used:
 elliotweiser.osx-command-line-tools and geerlingguy.homebrew from these Github repos:
@@ -29,3 +31,11 @@ https://github.com/geerlingguy/ansible-role-homebrew
 Normally I use oh-my-zsh, but for fun, I followed this guide: https://medium.freecodecamp.org/jazz-up-your-bash-terminal-a-step-by-step-guide-with-pictures-80267554cb22 and configured my terminal.
 
 I'd say that oh-my-zsh is the much easier way to go, what you get out of the box with minimal fuss is really amazing! In the past I have also often used iTerm2 instead of the default Mac terminal.
+
+For updates on Mac, pass the --upgrade flag and it will upgrade packages and casks using Homebrew.
+
+Ubuntu Only Section
+
+Ansible is installed and then used to install Docker. Some configuration is done and then containers are started.
+
+docker_ubuntu.yml and media_server.yml are the two playbooks used for Ubuntu.
