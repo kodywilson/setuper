@@ -81,3 +81,13 @@
         groups: docker
         append: yes
       when: user_accts.stdout.find('vagrant') != -1
+
+    - name: "Set environment for docker"
+      blockinfile:
+        path: /etc/environment
+        backup: yes
+        block: |
+          PUID=1002
+          PGID=130
+          TZ="America/Los_Angeles"
+          USERDIR="/docker"
