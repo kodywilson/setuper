@@ -91,3 +91,11 @@
           PGID=130
           TZ="America/Los_Angeles"
           USERDIR="/docker"
+
+    - name: "Install Docker Compose"
+      apt:
+        pkg:
+          - docker-compose
+        state: present
+        autoclean: yes
+      tags: docker
