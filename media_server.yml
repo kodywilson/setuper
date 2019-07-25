@@ -15,4 +15,6 @@
       with_items:
         - { dest: '/docker/jellyfin/config', owner: 'crane', group: 'docker', mode: '0774'}
         - { dest: '/docker/kodi', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/shared', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/traefik/acme', owner: 'crane', group: 'docker', mode: '0774'}  
         - { dest: '/tank/Movies', owner: 'crane', group: 'docker',  mode: '0774'}
