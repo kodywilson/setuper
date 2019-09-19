@@ -31,16 +31,16 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo "...setting ownership and permissions for docker user."
     sudo ansible-playbook media_server.yml
     for i in {1..3}; do echo; done
-    if [ ! "$(docker ps -q -f name=jellyfin)" ]; then
-      if [ "$(docker ps -aq -f status=exited -f name=jellyfin)" ]; then
-        docker rm jellyfin # cleanup
-      fi
-      echo "Trying to start up a Jellyfin container..."
-      sudo docker run -d --name=jellyfin --net=host -v /docker/jellyfin/config:/config -v /tank:/media --user "$(id -u crane):$(id -g crane)" jellyfin/jellyfin:latest
-    else
-      echo "Jellyfin is already running..."
-    fi
-    for i in {1..3}; do echo; done
+    #if [ ! "$(docker ps -q -f name=jellyfin)" ]; then
+    #  if [ "$(docker ps -aq -f status=exited -f name=jellyfin)" ]; then
+    #    docker rm jellyfin # cleanup
+    #  fi
+    #  echo "Trying to start up a Jellyfin container..."
+    #  sudo docker run -d --name=jellyfin --net=host -v /docker/jellyfin/config:/config -v /tank:/media --user "$(id -u crane):$(id -g crane)" jellyfin/jellyfin:latest
+    #else
+    #  echo "Jellyfin is already running..."
+    #fi
+    #for i in {1..3}; do echo; done
     #echo "Now install xdocker11 and prepare for kodi on docker..."
     #sudo sed -i 's/allowed_users=console/allowed_users=anybody/g' /etc/X11/Xwrapper.config
     #curl -fsSL https://raw.githubusercontent.com/mviereck/x11docker/master/x11docker | sudo bash -s -- --update
