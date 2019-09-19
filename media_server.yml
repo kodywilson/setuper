@@ -18,3 +18,11 @@
         - { dest: '/docker/shared', owner: 'crane', group: 'docker', mode: '0774'}
         - { dest: '/docker/traefik/acme', owner: 'crane', group: 'docker', mode: '0774'}  
         - { dest: '/tank/Movies', owner: 'crane', group: 'docker',  mode: '0774'}
+        - { dest: '/docker/lazylibrarian', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/letsencrypt', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/lidarr', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/ombi', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/portainer', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/qbittorent', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/sabnzbd', owner: 'crane', group: 'docker', mode: '0774'}
+        - { dest: '/docker/sonarr', owner: 'crane', group: 'docker', mode: '0774'}
